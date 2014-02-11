@@ -35,8 +35,8 @@ public class MyActivity extends Activity {
 
 
         try {
-            conn = DriverManager.getConnection(CONNECTION_URL, user, pass);
-        } catch (java.sql.SQLException e1) {
+            conn = DriverManager.getConnection( CONNECTION_URL, user, pass );
+        }catch( java.sql.SQLException e1 ){
             e1.printStackTrace();
             out.println("Lol failed to get connection;");
         }finally{
@@ -50,7 +50,7 @@ public class MyActivity extends Activity {
                 rs.close();
                 stmt.close();
                 conn.close();
-            } catch (java.sql.SQLException e) {
+            }catch( java.sql.SQLException e ){
                 e.printStackTrace();
             }
         }

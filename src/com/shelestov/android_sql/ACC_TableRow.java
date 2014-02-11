@@ -3,7 +3,7 @@ package com.shelestov.android_sql;
 import java.util.Date;
 
 /**
- * Created by s13 on 2/11/14.
+ * Created by Andrew Shelestov on 2/11/14.
  */
 public class ACC_TableRow {
     public Integer  id;
