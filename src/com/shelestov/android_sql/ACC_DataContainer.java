@@ -8,10 +8,8 @@ import java.util.concurrent.Semaphore;
  */
 public class ACC_DataContainer {
     private static ACC_DataContainer instance;
-
     private static Semaphore sem = new Semaphore( 1, true );
     private LinkedList<ACC_TableRow> acc_table = new LinkedList<ACC_TableRow>();
-
 
     public static synchronized ACC_DataContainer getInstance() {
         if( instance == null ){
