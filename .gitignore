@@ -1,3 +1,23 @@
 *.class
 *.apk
 *.properties
+
+project.properties
+
+*.class
+
+out/production/Android SQL/Android SQL.apk
+
+out/production/Android SQL/Android SQL.unaligned.apk
+
+.idea/workspace.xml
+
+.idea/misc.xml
+
+out/production/Android SQL/com/shelestov/android_sql/MyActivity.class
+
+out/production/Android SQL/com/shelestov/android_sql/R$layout.class
+
+out/production/Android SQL/com/shelestov/android_sql/R$string.class
+
+out/production/Android SQL/com/shelestov/android_sql/R.class
