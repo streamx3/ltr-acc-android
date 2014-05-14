@@ -1,6 +1,7 @@
 package com.shelestov.android_sql;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.os.Bundle;
 
 import android.view.View;
@@ -36,7 +37,6 @@ public class MyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         acc_set1 = new ACC_Settings( getApplicationContext() ); // ??? Not sure about this string
-        acc_set1.readHistory();
 
         // Interface bind
         editText_ip         = (EditText) findViewById( R.id.editText_ip );
@@ -48,37 +48,7 @@ public class MyActivity extends Activity {
 
         spinner_login = ( Spinner ) findViewById( R.id.spinner_saved_login_select );
 
-        CONNECTIONS = acc_set1.getLoginList();
-        drop_down_logins = LInfoList2StrArr(CONNECTIONS);
-//        setLoginbyId( 0 );
-
-        // Account sellector
-
-        // adapter
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>( this, android.R.layout.simple_spinner_item,
-                                                                 drop_down_logins);
-        adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
-
-        spinner_login.setAdapter( adapter );
-        // header
-        // not working
-        // spinner.setPrompt( "Choose!" );
-        // selected element
-        spinner_login.setSelection( 0 );
-        // set processing
-        spinner_login.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected( AdapterView<?> parent, View view, int position, long id ) {
-                // showing possition of pressed element
-                spinner_position = position;
-                // TODO Remove this toast after debug
-                Toast.makeText( getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT ).show();
-                handleLoginSelection();
-            }
-            @Override
-            public void onNothingSelected( AdapterView<?> arg0 ){}
-        } );
-        addListenerOnChkSave();
+        refresh();
     }
 
 
@@ -101,7 +71,6 @@ public class MyActivity extends Activity {
                 System.out.println( "[bmagic] Save login = " + save_login + ";" );
             }
         });
-
     }
 
     public void onConnectClicked( View view ){
@@ -180,12 +149,50 @@ public class MyActivity extends Activity {
     }
 
     public void handleLoginSelection(){
-        if( spinner_position == CONNECTIONS.size() ){ // "New..." option selected
+        if( spinner_position == CONNECTIONS.size() ){   // "New..." option selected
             chbox_save.setText("Save");
             setLoginbyId( spinner_position );
         }else{ // Updating option selected
             chbox_save.setText("Update");
             setLoginbyId( spinner_position );
         }
+    }
+
+    public void handleDeleteButton( View view ){
+        if( spinner_position < CONNECTIONS.size() - 1 ){
+            acc_set1.DeleteLogin(CONNECTIONS.get(spinner_position).id);
+        }
+        refresh();
+    }
+
+    private void refresh(){
+        acc_set1.readHistory();
+        CONNECTIONS = acc_set1.getLoginList();
+        drop_down_logins = LInfoList2StrArr(CONNECTIONS);
+
+        // Account sellector
+
+        // adapter
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>( this, android.R.layout.simple_spinner_item,
+                drop_down_logins);
+        adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+
+        spinner_login.setAdapter( adapter );
+        // header
+        spinner_login.setSelection( 0 );
+        // set processing
+        spinner_login.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected( AdapterView<?> parent, View view, int position, long id ) {
+                // showing possition of pressed element
+                spinner_position = position;
+                // TODO Remove this toast after debug
+                Toast.makeText( getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT ).show();
+                handleLoginSelection();
+            }
+            @Override
+            public void onNothingSelected( AdapterView<?> arg0 ){}
+        } );
+        addListenerOnChkSave();
     }
 }

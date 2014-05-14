@@ -59,6 +59,7 @@ public class ACC_Settings extends SQLiteOpenHelper {
 //                ACC_LInfo.name_table,
 //                ACC_LInfo.name_password };
         System.out.println( "[bmagic] " + (new Throwable()).getStackTrace()[0].toString() + " <in>" );
+        SAVED_CONNECTIONS.clear();
         SQLiteDatabase tmp_db_r = this.getReadableDatabase();
         if (tmp_db_r != null) {
             cursor= getReadableDatabase().rawQuery( "SELECT * FROM " +DATABASE_LOGIN_TABLE_NAME + ";", null );
