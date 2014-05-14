@@ -19,8 +19,9 @@ public class ACC_NetworkThread {
     private Boolean stop_thread = false;
 
     private LinkedList<ACC_TableRow> queue = new LinkedList<ACC_TableRow>(); //to process
-    private LinkedList<ACC_TableRow> shot = new LinkedList<ACC_TableRow>();  //temporal data for data container
+    private LinkedList<ACC_TableRow> shot = new LinkedList<ACC_TableRow>();  //temporal drop_down_logins for drop_down_logins container
 
+    //URL consists of protocol:subprotocol://[hostname]:[PORT]/[DATABASE]
     private String CONNECTION_URL = "jdbc:mysql://192.168.1.132/test";
     private String user = "test";
     private String pass = "test";
